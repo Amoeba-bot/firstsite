@@ -110,41 +110,41 @@ let folderSelectorUpdate = function (folderList) {
 let getId = function (object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
-// //Функция создания заметки
-// let createNote = function () {
-//     if (getId(allFolders, document.getElementById("folderSelector").value)) // проверяем выбрана ли папка
-//     {
-//         let note = {
-//             name: document.getElementById("noteName").value,
-//             text: document.getElementById("noteText").value,
-//             folderId: getId(allFolders, document.getElementById("folderSelector").value),
-//             id: Date.now()
-//         }
-//         console.log(note);
-//         popup.classList.remove('modal--show'); // Закрываем окно
+// Функция создания заметки
+let createNote = function () {
+    if (getId(allFolders, document.getElementById("folderSelector").value)) // проверяем выбрана ли папка
+    {
+        let note = {
+            name: document.getElementById("noteName").value,
+            text: document.getElementById("noteText").value,
+            folderId: getId(allFolders, document.getElementById("folderSelector").value),
+            id: Date.now()
+        }
+        console.log(note);
+        popup.classList.remove('modal--show'); // Закрываем окно
 
-//         let place = document.getElementById(note.folderId);
-//         console.log(place);
-//         let title = document.createElement('p');
-//         title.textContent = note.name;
-//         title.classList.add('noteTitle');
-//         title.id = note.id;
-//         // клик по заметке 
-//         title.addEventListener('click', noteClicked);
-//         place.appendChild(title);
-//         allNotes.push(note);
-//         console.log(allNotes);
-//     }
-//     else { //если папка не выбрана
-//         popup.classList.remove('modal--show');
-//         Swal.fire({
-//             icon: 'error',
-//             title: 'Oops...',
-//             text: 'You cant create note without folder!',
-//           })
+        let place = document.getElementById(note.folderId);
+        console.log(place);
+        let title = document.createElement('p');
+        title.textContent = note.name;
+        title.classList.add('noteTitle');
+        title.id = note.id;
+        // клик по заметке 
+        title.addEventListener('click', noteClicked);
+        place.appendChild(title);
+        allNotes.push(note);
+        console.log(allNotes);
+    }
+    else { //если папка не выбрана
+        popup.classList.remove('modal--show');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You cant create note without folder!',
+          })
 
-//     }
-// }
+    }
+}
 // Функция просмотра заметки 
 let noteClicked = function (evt) {
     for (let j = 0; j < allNotes.length; j++) {
