@@ -147,30 +147,12 @@ let createNote = function () {
 }
 // Функция просмотра заметки 
 let noteClicked = function (evt) {
-    // чистим окно просмотра заметки
-    let contentPlace = document.querySelector('.noteReader__content');
-    while (contentPlace.firstChild) {
-        contentPlace.firstChild.remove();
-    }
-    noteReaderModal.classList.add('modal--show');
     for (let j = 0; j < allNotes.length; j++) {
-        console.log(allNotes[j].id);
-        if (allNotes[j].id == evt.target.id) {
-            let contentPlace = document.querySelector('.noteReader__content');
-            let noteName = document.createElement('p');
-            noteName.textContent = allNotes[j].name;
-            console.log(allNotes[j].name);
-            let noteText = document.createElement('p');
-            noteText.textContent = allNotes[j].text;
-            contentPlace.appendChild(noteName);
-            contentPlace.appendChild(noteText);
-
-        }
-    }
-
-
-}
-
+            if (allNotes[j].id == evt.target.id) {
+    Swal.fire(
+        allNotes[j].name,
+        allNotes[j].text,
+      )}}}
 //Эвенты на кнопках Кнопки
 buttonCreateFolder.addEventListener('click', function () {
     createFolder();
