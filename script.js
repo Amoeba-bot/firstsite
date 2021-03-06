@@ -1,3 +1,4 @@
+
 //Проверяем локальное хранилище и создаём массивы папок и заметок
 let allFolders = {};
 var allNotes = [];
@@ -25,32 +26,41 @@ let closeNoteReaderButton = document.querySelector('.noteReader');
 
 // Функция создания папки
 let createFolder = function () {
-    let folderName = prompt('Создать папку с названием:');
-    if (folderName) {
-        let element = document.createElement('div');
-        element.classList.add('folder');
-        element.classList.add('folder-closed');
-        element.id = Date.now();
-        // Исправить порядок текста и картинки --------------------------------------------------------------------------------------------------------
-        let folderTitle = document.createElement('p');
-        folderTitle.classList.add('.folder-name');
-        folderTitle.textContent = folderName;
-        element.appendChild(folderTitle);
-        let folderImage = document.createElement('img');
-        folderImage.src = 'img/folder-closed.svg';
-        folderImage.style.width = '48px';
-        folderImage.style.height = '48px';
-        folderTitle.appendChild(folderImage);
-
-        foldersList.appendChild(element);
-        folderTitle.addEventListener('click', folderToggle);
-        // запись папки в объект
-        allFolders[element.id] = folderName;
-
-    }
-    else {
-        alert('Создание папки отменено!');
-    }
+    let folderName = 0
+    Swal.fire({
+        title: 'Enter new folders name',
+        input: 'text',
+        inputLabel: 'Name',
+        showCancelButton: true,
+        inputValidator: (value) => {
+          if (!value) {
+            return 'You need to write something!'
+          }
+          else {
+            folderName = value;
+            console.log(folderName);
+            let element = document.createElement('div');
+            element.classList.add('folder');
+            element.classList.add('folder-closed');
+            element.id = Date.now();
+            // Исправить порядок текста и картинки --------------------------------------------------------------------------------------------------------
+            let folderTitle = document.createElement('p');
+            folderTitle.classList.add('.folder-name');
+            folderTitle.textContent = folderName;
+            element.appendChild(folderTitle);
+            let folderImage = document.createElement('img');
+            folderImage.src = 'img/folder-closed.svg';
+            folderImage.style.width = '48px';
+            folderImage.style.height = '48px';
+            folderTitle.appendChild(folderImage);
+    
+            foldersList.appendChild(element);
+            folderTitle.addEventListener('click', folderToggle);
+            // запись папки в объект
+            allFolders[element.id] = folderName;
+          }
+        }
+      })   
 }
 
 // Функция открывания папки ------------ исправить ошибку с кликом по картинке----------------------
@@ -127,7 +137,11 @@ let createNote = function () {
     }
     else { //если папка не выбрана
         popup.classList.remove('modal--show');
-        alert('Нельзя создать заметку без папки!');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You cant create note without folder!',
+          })
 
     }
 }
@@ -179,14 +193,26 @@ document.addEventListener('keydown', function (evt) {
 closeNoteReaderButton.addEventListener('click', function () {
     noteReaderModal.classList.remove('modal--show');
 })
-
+// Кнопка сохранения
 buttonSave.addEventListener('click', function () {
     console.log(allFolders);
     console.log(allNotes);
     localStorage.setItem("folders", JSON.stringify(allFolders));
     localStorage.setItem("notes", JSON.stringify(allNotes));
+    let saveBar = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      })
+      
+      saveBar.fire({
+        icon: 'success',
+        title: 'Saved successfully'
+      })
 })
-
+// Кнопка удаления
 buttonDel.addEventListener('click', function () {
     localStorage.clear('folders');
     localStorage.clear('notes');
@@ -196,6 +222,18 @@ buttonDel.addEventListener('click', function () {
     }
     allFolders = {};
     allNotes = [];
+    let deleteBar = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      })
+      
+      deleteBar.fire({
+        icon: 'error',
+        title: 'All data was deleted from your browser'
+      })
 })
 
 buttonCreate.addEventListener('click', function () {
