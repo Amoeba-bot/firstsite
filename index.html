@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="index.css">
+  <title>NotesEditor</title>
+</head>
+
+<body>
+  <header>
+  </header>
+  <main>
+    <div class="folders-list">
+    </div>
+
+    <div class="buttons-list">
+      <button class="button-create-note">Create note</button>
+      <button class="button-create-folder">Create folder</button>
+      <button class="button-delete">Delete all</button>
+      <button class="button-save">Save changes</button>
+    </div>
+
+    <section class="modal">
+      <div class="modal__content">
+        <button class="modal__button button-close" type="button">Закрыть</button>
+        <textarea id="noteName" name="noteName" rows=1 cols=30> Note name</textarea>
+        <select id="folderSelector">Выбрать папку</select>
+        <textarea id="noteText" name="note" rows=20 cols=30> Note text</textarea>
+        <button class="button-create">Create</button>
+      </div>
+    </section>
+    <section class="noteReader">
+      <div class="noteReader__content">
+        <button class="noteReader__button button-close" type="button">Закрыть</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>
+<script src="script.js"></script>
