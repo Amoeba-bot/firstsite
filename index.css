@@ -18,11 +18,12 @@
 }
 .folder-opened {
   cursor: pointer;
-    color: yellow;
+    color: blue;
+    padding: 10px 10px ;
 }
 .folder-closed {
   cursor: pointer;
-    color: pink;
+    color: red;
     padding: 10px 10px ;
 }
 .button-create-note, .button-create-folder, .button-save, .button-create {
